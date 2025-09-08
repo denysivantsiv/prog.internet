@@ -1,0 +1,45 @@
+﻿<HTML>
+<HEAD>
+    <SCRIPT LANGUAGE="JavaScript">let product = ["Документ", "Іграшка", "Дзига"];
+let quantity = [30, 120, 75];
+let cost = [15, 250, 60];
+let currentIndex = -1;
+
+function fun1() {
+    let name = document.form1.name_cont.value;
+    currentIndex = product.indexOf(name);
+    if (currentIndex !== -1) {
+        document.form1.output_quantity.value = quantity[currentIndex];
+        document.form1.output_cost.value = cost[currentIndex];
+    }
+}
+
+function fun2() {
+    if (currentIndex !== -1) {
+        let sum = quantity[currentIndex] * cost[currentIndex];
+        document.form1.output_sum.value = "Загальна сума: " + sum;
+    } else {
+        document.form1.output_sum.value = "Спочатку виберіть товар";
+    }
+}</SCRIPT>
+</HEAD>
+<BODY>
+    <h3>Завдання 7.</h3>
+    <FORM NAME="form1">
+        Оберіть товар:
+        <SELECT NAME="name_cont">
+            <OPTION value="Документ">Документ</OPTION>
+            <OPTION value="Іграшка">Іграшка</OPTION>
+            <OPTION value="Дзига">Дзига</OPTION>
+        </SELECT>
+        <BR><BR>
+        <INPUT TYPE="button" VALUE="Наявна кількість і вартість" onClick="fun1()">
+        <BR><BR>
+        Кількість: <INPUT TYPE="text" SIZE="20" NAME="output_quantity">
+        Вартість: <INPUT TYPE="text" SIZE="20" NAME="output_cost">
+        <BR><BR>
+        <INPUT TYPE="button" VALUE="Загальна сума" onClick="fun2()">
+        <INPUT TYPE="text" SIZE="40" NAME="output_sum">
+    </FORM>
+</BODY>
+</HTML>

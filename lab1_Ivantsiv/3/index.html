@@ -1,0 +1,23 @@
+﻿<html>
+<head>
+    <script>
+        function fun(a) {
+            main_form.t_res.value = a;
+        }
+        function fun1(a) {
+            main_form.t_res2.value = a;
+        }
+    </script>
+</head>
+<body>
+    <h3> Завдання 3.</h3>
+    <p> Це звичайний HTML абзац.</p>
+    <script>document.write("Привіт! Мене звати Денис, студент групи ІПЗ-22.")</script>
+    <p>Знову звичайний HTML абзац.</p>
+    <form id="main_form">
+        <input type="text" size="100" id="t_res" onClick="fun('Відбувся клік на текстовому елементі форми');">
+        <input type="text" size="100" value="onMouseOut" onMouseOut="fun1('Курсор покинув форму');"><br>
+        <input type="text" size="100" id="t_res2" ;"><br>
+    </form>
+</body>
+</html>
