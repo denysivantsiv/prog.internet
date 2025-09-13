@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function demoConsole() {
+            let a = 14;
+            let b = 3;
+
+            console.log("Остача від ділення %d на %d = %d", a, b, a % b);
+            console.log("Чи ділиться %d на %d без остачі? -> %s", a, b, (a % b === 0));
+
+            let arr = [11, 22, 28, 71];
+            console.log("Масив: %d, %d, %d, %d", arr[0], arr[1], arr[2], arr[3]);
+            console.log("Другий елемент масиву як рядок: %s", arr[1]);
+
+            console.info("Це інформаційне повідомлення");
+            console.warn("Це попередження");
+            console.error("Це помилка");
+
+            let obj = { x: 1, y: { z: 2 } };
+            console.dir(obj);
+            console.dirxml(document.body);
+
+            console.time("Таймер");
+            for (let i = 0; i < 1000000; i++) { }
+            console.timeEnd("Таймер");
+
+            console.profile("Профіль");
+            for (let i = 0; i < 10000; i++) { }
+            console.profileEnd("Профіль");
+
+            console.assert(a % b === 0, "Помилка: %d не ділиться на %d без остачі", a, b);
+        }
+    </script>
+</head>
+<body onload="demoConsole()">
+    Відкрий консоль.
+</body>
+</html>

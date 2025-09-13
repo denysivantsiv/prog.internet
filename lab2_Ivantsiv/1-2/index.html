@@ -1,0 +1,80 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1-2</title>
+</head>
+<body onload="clock()">
+    <h3>Завдання 1</h3>
+    <form name="clock">
+        Календар:
+        <input type="text" name="calendar" size="25" value=""><br>
+    </form>
+
+    <script>
+        function clock() {
+            let now = new Date();
+
+            let year = now.getFullYear();
+            let month = (now.getMonth() + 1).toString().padStart(2, "0");
+            let day = now.getDate().toString().padStart(2, "0");
+            let hours = now.getHours().toString().padStart(2, "0");
+            let minutes = now.getMinutes().toString().padStart(2, "0");
+            let seconds = now.getSeconds().toString().padStart(2, "0");
+
+            let dateTimeStr = `${year}:${month}:${day}:${hours}:${minutes}:${seconds}`;
+
+            document.clock.calendar.value = dateTimeStr;
+
+            setTimeout(clock, 1000);
+        }
+
+        clock();
+    </script>
+    <h3>Завдання 2</h3>
+    Калькулятор:
+    <input type="text" id="output" readonly style="width: 160px; height: 25px;"><br><br>
+
+    <button onclick="addSymbol('7')">7</button>
+    <button onclick="addSymbol('8')">8</button>
+    <button onclick="addSymbol('9')">9</button>
+    <button onclick="addSymbol('/')">/</button><br>
+
+    <button onclick="addSymbol('4')">4</button>
+    <button onclick="addSymbol('5')">5</button>
+    <button onclick="addSymbol('6')">6</button>
+    <button onclick="addSymbol('*')">*</button><br>
+
+    <button onclick="addSymbol('1')">1</button>
+    <button onclick="addSymbol('2')">2</button>
+    <button onclick="addSymbol('3')">3</button>
+    <button onclick="addSymbol('-')">-</button><br>
+
+    <button onclick="addSymbol('0')">0</button>
+    <button onclick="addSymbol('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="addSymbol('+')">+</button><br><br>
+
+    <button onclick="clearOutput()">C</button>
+
+    <script>
+        function addSymbol(symbol) {
+            document.getElementById("output").value += symbol;
+        }
+
+        function calculate() {
+            let expr = document.getElementById("output").value;
+            try {
+                document.getElementById("output").value = eval(expr);
+            } catch {
+                document.getElementById("output").value = "Помилка";
+            }
+        }
+
+        function clearOutput() {
+            document.getElementById("output").value = "";
+        }
+    </script>
+</body>
+</html >
