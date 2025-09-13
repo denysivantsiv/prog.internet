@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>let str, stb;
+       <script>let str, stb;
 function fun() {
     str = parseInt(main_form.t_str.value);
     stb = parseInt(main_form.t_stb.value);
@@ -23,32 +23,32 @@ function fun() {
 }
 function fun_build() {
     if (str < 2) {
-        alert("Ìàòðèöÿ ìàº ìåíøå í³æ 2 ðÿäêè");
+        alert("Матриця має менше ніж 2 рядки");
         return;
     }
     let sum = 0;
     for (let j = 1; j <= stb; j++) {
         sum += parseInt(document.getElementById("_2_" + j).value);
     }
-    alert("Ñóìà äðóãîãî ðÿäêà = " + sum);
+    alert("Сума другого рядка = " + sum);
 }</script>
 </head>
 <body>
     <form id="main_form">
         <table>
             <tr>
-                <td>Ê³ëüê³ñòü ðÿäê³â</td>
+                <td>Кількість рядків</td>
                 <td><input type="text" id="t_str" value="5"></td>
             </tr>
             <tr>
-                <td>Ê³ëüê³ñòü ñòîâïö³â</td>
+                <td>Кількість стовпців</td>
                 <td><input type="text" id="t_stb" value="5"></td>
             </tr>
             <tr>
-                <td><input type="button" onClick="fun();" value="Ïîáóäóâàòè ìàòðèöþ"></td>
+                <td><input type="button" onClick="fun();" value="Побудувати матрицю"></td>
             </tr>
             <tr>
-                <td><input type="button" onClick="fun_build();" value="Ðîçðàõóâàòè"></td>
+                <td><input type="button" onClick="fun_build();" value="Розрахувати"></td>
             </tr>
         </table>
         <div id="main_div"></div>
