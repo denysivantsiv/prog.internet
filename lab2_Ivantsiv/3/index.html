@@ -1,5 +1,7 @@
 <html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
     <script>let str, stb;
 function fun() {
     str = parseInt(main_form.t_str.value);
@@ -20,32 +22,32 @@ function fun() {
 }
 function fun_build() {
     if (str < 2) {
-        alert("Матриця має менше ніж 2 рядки");
+        alert("ГЊГ ГІГ°ГЁГ¶Гї Г¬Г Вє Г¬ГҐГ­ГёГҐ Г­ВіГ¦ 2 Г°ГїГ¤ГЄГЁ");
         return;
     }
     let sum = 0;
     for (let j = 1; j <= stb; j++) {
         sum += parseInt(document.getElementById("_2_" + j).value);
     }
-    alert("Сума другого рядка = " + sum);
+    alert("Г‘ГіГ¬Г  Г¤Г°ГіГЈГ®ГЈГ® Г°ГїГ¤ГЄГ  = " + sum);
 }</script>
 </head>
 <body>
     <form id="main_form">
         <table>
             <tr>
-                <td>Кількість рядків</td>
+                <td>ГЉВіГ«ГјГЄВіГ±ГІГј Г°ГїГ¤ГЄВіГў</td>
                 <td><input type="text" id="t_str" value="5"></td>
             </tr>
             <tr>
-                <td>Кількість стовпців</td>
+                <td>ГЉВіГ«ГјГЄВіГ±ГІГј Г±ГІГ®ГўГЇГ¶ВіГў</td>
                 <td><input type="text" id="t_stb" value="5"></td>
             </tr>
             <tr>
-                <td><input type="button" onClick="fun();" value="Побудувати матрицю"></td>
+                <td><input type="button" onClick="fun();" value="ГЏГ®ГЎГіГ¤ГіГўГ ГІГЁ Г¬Г ГІГ°ГЁГ¶Гѕ"></td>
             </tr>
             <tr>
-                <td><input type="button" onClick="fun_build();" value="Розрахувати"></td>
+                <td><input type="button" onClick="fun_build();" value="ГђГ®Г§Г°Г ГµГіГўГ ГІГЁ"></td>
             </tr>
         </table>
         <div id="main_div"></div>
