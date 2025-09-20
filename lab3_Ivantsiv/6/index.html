@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 6</title>
+  <style>
+    ul { list-style-type: none; padding-left: 20px; }
+    li { cursor: pointer; }
+    .nested { display: none; }
+    .active { display: block; }
+  </style>
+</head>
+<body>
+  <h3>Ієрархічне дерево</h3>
+
+  <ul>
+    <li onclick="toggle(this)">fruits
+      <ul class="nested">
+        <li>apple</li>
+        <li>pineapple</li>
+        <li>appricot</li>
+        <li>pear</li>
+        <li>lemon</li>
+      </ul>
+    </li>
+    <li onclick="toggle(this)">vegetables
+      <ul class="nested">
+        <li>potatoes</li>
+        <li>beetroot</li>
+        <li>carrots</li>
+        <li>pear</li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    function toggle(el) {
+      let nested = el.querySelector(".nested");
+      if (nested) {
+        nested.classList.toggle("active");
+      }
+    }
+  </script>
+</body>
+</html>

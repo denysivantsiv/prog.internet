@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 5</title>
+  <style>
+    body { font-family: Arial; }
+    #task { font-size: 20px; margin: 10px 0; }
+    #result { margin: 10px 0; font-weight: bold; }
+    #score { margin: 10px 0; color: blue; }
+    input { font-size: 18px; width: 60px; text-align: center; }
+    button { margin: 5px; padding: 5px 10px; }
+  </style>
+</head>
+<body>
+  <h3>Арифметичний тренажер</h3>
+
+  <div id="task"></div>
+  <input type="text" id="answer">
+  <button onclick="checkAnswer()">Перевірити</button>
+  <button onclick="nextTask()">Наступне завдання</button>
+
+  <div id="result"></div>
+  <div id="score"></div>
+
+  <script>
+    let a, b, op, correctAnswer;
+    let questionCount = 0;
+    let correctCount = 0;
+    const totalQuestions = 5;
+
+    function randomTask() {
+      a = Math.floor(Math.random() * 10);
+      b = Math.floor(Math.random() * 10);
+      let ops = ['+','-','*','/'];
+      op = ops[Math.floor(Math.random() * ops.length)];
+
+      switch(op) {
+        case '+': correctAnswer = a + b; break;
+        case '-': correctAnswer = a - b; break;
+        case '*': correctAnswer = a * b; break;
+        case '/': 
+          if (b === 0) b = 1;
+          correctAnswer = (a / b).toFixed(2); 
+          break;
+      }
+
+      document.getElementById("task").innerText = `${a} ${op} ${b} = ?`;
+      document.getElementById("answer").value = "";
+      document.getElementById("result").innerText = "";
+    }
+
+    function checkAnswer() {
+      let userAnswer = document.getElementById("answer").value.trim();
+      let isCorrect = false;
+
+      if (op === '/') {
+        isCorrect = (parseFloat(userAnswer).toFixed(2) === correctAnswer);
+      } else {
+        isCorrect = (parseInt(userAnswer) === correctAnswer);
+      }
+
+      if (isCorrect) {
+        correctCount++;
+        document.getElementById("result").innerText = "Правильно";
+      } else {
+        document.getElementById("result").innerText = `Помилка, правильна відповідь: ${correctAnswer}`;
+      }
+    }
+
+    function nextTask() {
+      questionCount++;
+      if (questionCount >= totalQuestions) {
+        let percent = Math.round((correctCount / totalQuestions) * 100);
+        document.getElementById("score").innerText = 
+          `Загальний рахунок: ${percent}% (${correctCount} правильних відповідей із ${totalQuestions})`;
+        document.getElementById("task").innerText = "Тест завершено!";
+        document.getElementById("answer").disabled = true;
+      } else {
+        randomTask();
+      }
+    }
+
+    randomTask();
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 1</title>
+  <script>
+    function calcArea() {
+      let a = parseFloat(document.getElementById("a").value);
+      let b = parseFloat(document.getElementById("b").value);
+
+      if (isNaN(a) || isNaN(b)) {
+        document.getElementById("result").innerText = "Введіть числа!";
+        return;
+      }
+      let s = a * b;
+
+      document.getElementById("result").innerText = "Площа = " + s;
+    }
+  </script>
+</head>
+<body>
+  <h3>Обчислення площі прямокутника</h3>
+  Довжина: <input type="text" id="a"><br><br>
+  Ширина: <input type="text" id="b"><br><br>
+  <button onclick="calcArea()">Обчислити</button>
+  <p id="result"></p>
+</body>
+</html>

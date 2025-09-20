@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 2</title>
+  <style>
+    #keyboard { margin-top: 10px; }
+    .row { margin-bottom: 5px; }
+    button {
+      width: 40px; height: 40px;
+      margin: 2px; font-size: 18px;
+      cursor: pointer;
+    }
+    textarea {
+      width: 100%; height: 100px;
+      font-size: 18px; margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="keyboard"></div>
+  <textarea id="output"></textarea><br>
+  <button onclick="clearText()">Очистити поле</button>
+
+  <script>
+    let digits = ['1','2','3','4','5','6','7','8','9','0'];
+    let letters = [
+      ['а','б','в','г','ґ','д','е','є','ж','з'],
+      ['и','і','ї','й','к','л','м','н','о','п'],
+      ['р','с','т','у','ф','х','ц','ч','ш','щ','ь','ю','я']
+    ];
+
+    let keyboard = document.getElementById("keyboard");
+    let output = document.getElementById("output");
+
+    let digitRow = document.createElement("div");
+    digitRow.className = "row";
+    digits.forEach(d => {
+      let btn = document.createElement("button");
+      btn.innerText = d;
+      btn.onclick = () => output.value += d;
+      digitRow.appendChild(btn);
+    });
+    keyboard.appendChild(digitRow);
+
+    letters.forEach(rowLetters => {
+      let row = document.createElement("div");
+      row.className = "row";
+      rowLetters.forEach(ch => {
+        let btn = document.createElement("button");
+        btn.innerText = ch;
+        btn.onclick = () => output.value += ch;
+        row.appendChild(btn);
+      });
+      keyboard.appendChild(row);
+    });
+
+    function clearText() {
+      output.value = "";
+    }
+  </script>
+</body>
+</html>

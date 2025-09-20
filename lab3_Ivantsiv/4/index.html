@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 4</title>
+  <style>
+    #viewer {
+      width: 400px; 
+      height: 300px;
+      border: 2px solid #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 15px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h3>Перегляд зображень</h3>
+  <div id="viewer">
+    <img id="image" src="" alt="Зображення">
+  </div>
+  <button onclick="prevImage()">Назад</button>
+  <button onclick="nextImage()">Вперед</button>
+
+  <script>
+    let images = ['file1.jpg', 'file2.gif', 'file3.gif', 'file4.png'];
+
+    let index = 0;
+    let img = document.getElementById("image");
+
+    function showImage() {
+      img.src = images[index];
+    }
+
+    function nextImage() {
+      index = (index + 1) % images.length;
+      showImage();
+    }
+
+    function prevImage() {
+      index = (index - 1 + images.length) % images.length;
+      showImage();
+    }
+    showImage();
+  </script>
+</body>
+</html>
