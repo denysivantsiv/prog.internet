@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab4_Ivantsiv</title>
+</head>
+<body>
+    <h1>Лабораторна робота 4</h1>
+<form id="testForm">
+        <div>
+            <h3>1. Який колір у трави?</h3>
+            <input type="radio" name="q1" value="1"> Зелений<br>
+            <input type="radio" name="q1" value="0"> Червоний<br>
+            <input type="radio" name="q1" value="0"> Синій<br>
+            <input type="radio" name="q1" value="0"> Жовтий
+        </div>
+
+        <div>
+            <h3>2. Скільки буде 2+2?</h3>
+            <input type="radio" name="q2" value="0"> 3<br>
+            <input type="radio" name="q2" value="1"> 4<br>
+            <input type="radio" name="q2" value="0"> 5<br>
+            <input type="radio" name="q2" value="0"> 6
+        </div>
+
+        <div>
+            <h3>3. Які з цих тварин літають?</h3>
+            <input type="checkbox" name="q3" value="1"> Птах<br>
+            <input type="checkbox" name="q3" value="0"> Кіт<br>
+            <input type="checkbox" name="q3" value="1"> Кажан<br>
+            <input type="checkbox" name="q3" value="0"> Собака
+        </div>
+
+        <div>
+            <h3>4. Які фрукти жовті?</h3>
+            <input type="checkbox" name="q4" value="1"> Банан<br>
+            <input type="checkbox" name="q4" value="0"> Яблуко<br>
+            <input type="checkbox" name="q4" value="1"> Лимон<br>
+            <input type="checkbox" name="q4" value="0"> Вишня
+        </div>
+
+        <div>
+            <h3>5. Яка пора року слідує за зимою?</h3>
+            <select name="q5">
+                <option value="0">Оберіть</option>
+                <option value="0">Літо</option>
+                <option value="1">Весна</option>
+                <option value="0">Осінь</option>
+            </select>
+        </div>
+
+        <div>
+            <h3>6. Які напої гарячі?</h3>
+            <select name="q6" multiple>
+                <option value="1">Чай</option>
+                <option value="0">Сік</option>
+                <option value="1">Кава</option>
+                <option value="0">Вода</option>
+            </select>
+        </div>
+
+        <div>
+            <h3>7. Яке прізвище у Тараса Шевченка?</h3>
+            <input type="text" name="q7">
+        </div>
+
+        <br>
+        <button type="button" onclick="checkTest()">Завершити тестування</button>
+    </form>
+
+    <div id="results" style="display:none">
+        <h2>Результати:</h2>
+        <table border="1">
+            <tr>
+                <th>Запитання</th>
+                <th>Ваша відповідь</th>
+                <th>Бал</th>
+            </tr>
+            <tbody id="resultsBody"></tbody>
+        </table>
+        <p><b>Загальний бал: <span id="totalScore">0</span>/10</b></p>
+    </div>
+
+    <script>
+        function checkTest() {
+            let total = 0;
+            const results = [];
+
+            results[0] = getRadioScore('q1');
+            results[1] = getRadioScore('q2');
+            results[2] = getCheckboxScore('q3');
+            results[3] = getCheckboxScore('q4');
+            results[4] = getSelectScore('q5');
+            results[5] = getMultiSelectScore('q6');
+            results[6] = getTextScore('q7');
+
+            showResults(results);
+        }
+
+        function getRadioScore(name) {
+            const radios = document.getElementsByName(name);
+            for (let radio of radios) {
+                if (radio.checked) {
+                    return parseInt(radio.value);
+                }
+            }
+            return 0;
+        }
+
+        function getCheckboxScore(name) {
+            const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+            if (checkboxes.length !== 2) return 0;
+            
+            let score = 0;
+            checkboxes.forEach(cb => score += parseInt(cb.value));
+            return score;
+        }
+
+        function getSelectScore(name) {
+            const select = document.querySelector(`select[name="${name}"]`);
+            return parseInt(select.value);
+        }
+
+        function getMultiSelectScore(name) {
+            const options = document.querySelectorAll(`select[name="${name}"] option:checked`);
+            if (options.length !== 2) return 0;
+            
+            let score = 0;
+            options.forEach(opt => score += parseInt(opt.value));
+            return score;
+        }
+
+        function getTextScore(name) {
+            const input = document.querySelector(`input[name="${name}"]`);
+            const answer = input.value.toLowerCase().trim();
+            return (answer === 'шевченко') ? 1 : 0;
+        }
+
+        function showResults(results) {
+            let total = 0;
+            const tbody = document.getElementById('resultsBody');
+            tbody.innerHTML = '';
+
+            for (let i = 0; i < 7; i++) {
+                total += results[i];
+                const row = `<tr>
+                    <td>${i+1}</td>
+                    <td>${getUserAnswer(i+1)}</td>
+                    <td>${results[i]}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            }
+
+            document.getElementById('totalScore').textContent = total;
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function getUserAnswer(qNum) {
+            switch(qNum) {
+                case 1:
+                case 2:
+                    const radios = document.getElementsByName('q'+qNum);
+                    for (let radio of radios) {
+                        if (radio.checked) return radio.nextSibling.textContent;
+                    }
+                    return 'Не обрано';
+                case 3:
+                case 4:
+                    const checks = document.querySelectorAll(`input[name="q${qNum}"]:checked`);
+                    if (checks.length === 0) return 'Не обрано';
+                    let answers = [];
+                    checks.forEach(cb => answers.push(cb.nextSibling.textContent));
+                    return answers.join(', ');
+                case 5:
+                    const select = document.querySelector('select[name="q5"]');
+                    return select.options[select.selectedIndex].text;
+                case 6:
+                    const multi = document.querySelectorAll('select[name="q6"] option:checked');
+                    if (multi.length === 0) return 'Не обрано';
+                    let multiAnswers = [];
+                    multi.forEach(opt => multiAnswers.push(opt.text));
+                    return multiAnswers.join(', ');
+                case 7:
+                    const text = document.querySelector('input[name="q7"]');
+                    return text.value || 'Не введено';
+            }
+        }
+    </script>
+</body>
+</html>
