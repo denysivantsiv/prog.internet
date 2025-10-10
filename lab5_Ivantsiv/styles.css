@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light-theme {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+body.dark-theme {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.burger-line {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex;
+    }
+    
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: inherit;
+        padding: 10px;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+}
