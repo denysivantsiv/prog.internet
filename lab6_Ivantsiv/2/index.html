@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+    <style>
+        input { margin: 5px; padding: 5px; border: 2px solid gray; }
+        .ok { border-color: green; }
+        .error { border-color: red; color: red; }
+        span { margin-left: 10px; font-size: 14px; }
+    </style>
+</head>
+<body>
+<h2>Завдання 2</h2>
+
+<form id="form">
+    <label>Е-mail:</label><br>
+    <input type="text" id="email"><span id="emailMsg"></span><br>
+
+    <label>Ім’я та прізвище:</label><br>
+    <input type="text" id="name"><span id="nameMsg"></span><br>
+
+    <label>Логін:</label><br>
+    <input type="text" id="login"><span id="loginMsg"></span><br>
+
+    <label>Пароль:</label><br>
+    <input type="password" id="pass"><span id="passMsg"></span><br>
+
+    <label>Поштовий індекс:</label><br>
+    <input type="text" id="index"><span id="indexMsg"></span><br>
+
+    <button type="button" onclick="check()">Перевірити</button>
+</form>
+
+<script>
+function check() {
+    let email = document.getElementById("email");
+    let name = document.getElementById("name");
+    let login = document.getElementById("login");
+    let pass = document.getElementById("pass");
+    let index = document.getElementById("index");
+
+    let emailMsg = document.getElementById("emailMsg");
+    let nameMsg = document.getElementById("nameMsg");
+    let loginMsg = document.getElementById("loginMsg");
+    let passMsg = document.getElementById("passMsg");
+    let indexMsg = document.getElementById("indexMsg");
+
+    let rEmail = /^[a-z0-9._%+-]+@pnu\.edu\.ua$/i;
+    let rName = /^[A-ZА-ЯІЇЄ][a-zа-яіїє]+ [A-ZА-ЯІЇЄ]+$/;
+    let rLogin = /^[a-zA-Z0-9]+$/;
+    let rPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_\-!@#$%^&*]).{8,}$/;
+    let rIndex = /^\d{5}$/;
+
+    function validate(field, regex, msgElem, okText, errText) {
+        if (regex.test(field.value)) {
+            field.className = "ok";
+            msgElem.innerHTML = okText;
+            msgElem.style.color = "green";
+        } else {
+            field.className = "error";
+            msgElem.innerHTML = errText;
+            msgElem.style.color = "red";
+        }
+    }
+
+    validate(email, rEmail, emailMsg, "✓", "Має бути @pnu.edu.ua");
+    validate(name, rName, nameMsg, "✓", "Невірний формат");
+    validate(login, rLogin, loginMsg, "✓", "Тільки латиниця");
+    validate(pass, rPass, passMsg, "✓", "Мін. 8 символів, буква, цифра, спецсимвол");
+    validate(index, rIndex, indexMsg, "✓", "5 цифр");
+}
+</script>
+
+</body>
+</html>
