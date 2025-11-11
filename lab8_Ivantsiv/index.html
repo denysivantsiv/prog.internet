@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab8_Ivantsiv</title>
+</head>
+<body>
+<script>
+// Завдання 1
+document.write("<b>Завдання 1</b><br>");
+
+let time = {
+  hours: 20,
+  minutes: 30,
+  seconds: 45
+};
+
+function showTime() {
+  let h = String(time.hours).padStart(2, "0");
+  let m = String(time.minutes).padStart(2, "0");
+  let s = String(time.seconds).padStart(2, "0");
+  document.write("Поточний час: " + h + ":" + m + ":" + s + "<br><br>");
+}
+
+function addSeconds() {
+  let sec = Number(document.getElementById("secInput").value);
+  let total = time.hours * 3600 + time.minutes * 60 + time.seconds + sec;
+  total = (total + 86400) % 86400;
+  time.hours = Math.floor(total / 3600);
+  time.minutes = Math.floor((total % 3600) / 60);
+  time.seconds = total % 60;
+  document.write("Після зміни часу:<br>");
+  showTime();
+}
+
+showTime();
+document.write('Введіть секунди: <input type="number" id="secInput"> ');
+document.write('<button onclick="addSeconds()">Змінити час</button><br><hr>');
+
+// Завдання 2.1
+document.write("<b>Завдання 2.1. Виведення поточної дати, дня тижня і часу</b><br>");
+document.write('<button onclick="showDate()">Виконати</button><br><br>');
+
+function showDate() {
+  let now = new Date();
+  let days = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п’ятниця", "субота"];
+  let months = ["січня","лютого","березня","квітня","травня","червня","липня","серпня","вересня","жовтня","листопада","грудня"];
+  let h = String(now.getHours()).padStart(2,"0");
+  let m = String(now.getMinutes()).padStart(2,"0");
+  document.write(`Дата: ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()} року<br>`);
+  document.write(`День тижня: ${days[now.getDay()]}<br>`);
+  document.write(`Час: ${h}:${m}<br><br>`);
+}
+
+// Завдання 2.2
+document.write("<b>Завдання 2.2</b><br>");
+function lastDay(year, month) {
+  let date = new Date(year, month, 0);
+  return date.getDate();
+}
+document.write("Останній день місяця (10.2025): " + lastDay(2025, 10) + "<br><br>");
+
+// Завдання 2.3
+document.write("<b>Завдання 2.3</b><br>");
+function secondsToday() {
+  let now = new Date();
+  let secPassed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+  let secToNext = 86400 - secPassed;
+  return { passed: secPassed, left: secToNext };
+}
+let res = secondsToday();
+document.write("Пройшло секунд: " + res.passed + "<br>");
+document.write("До наступного дня: " + res.left + "<br><hr>");
+
+// Завдання 3
+document.write("<b>Завдання 3</b><br>");
+class Car {
+  constructor(brand, model, year) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+  }
+  info() {
+    return `Авто: ${this.brand} ${this.model}, ${this.year} року.`;
+  }
+}
+const car1 = new Car("Toyota", "Camry", 2020);
+document.write(car1.info() + "<br><hr>");
+
+// Завдання 4
+document.write("<b>Завдання 4</b><br>");
+class ElectricCar extends Car {
+  constructor(brand, model, year, battery) {
+    super(brand, model, year);
+    this.battery = battery;
+  }
+  charge() {
+    return `${this.brand} ${this.model} заряджається... Батарея: ${this.battery} kWh`;
+  }
+}
+const tesla = new ElectricCar("Tesla", "Model 3", 2022, 75);
+document.write(tesla.info() + "<br>");
+document.write(tesla.charge() + "<br><hr>");
+
+// Завдання 5
+document.write("<b>Завдання 5</b><br>");
+class MathHelper {
+  static add(a, b) {
+    return a + b;
+  }
+}
+document.write("5 + 7 = " + MathHelper.add(5, 7) + "<br>");
+
+// Завдання 6
+document.write("<b>Завдання 6</b><br>");
+class Student {
+  constructor(name, group, grades) {
+    this.name = name;
+    this.group = group;
+    this.grades = grades;
+  }
+
+  getAverageGrade() {
+    let sum = 0;
+    for (let i = 0; i < this.grades.length; i++) {
+      sum += this.grades[i];
+    }
+    return (sum / this.grades.length).toFixed(2);
+  }
+
+  static compareByGrade(st1, st2) {
+    return st2.getAverageGrade() - st1.getAverageGrade();
+  }
+}
+
+let st1 = new Student("Іван", "П-21", [90, 85, 88]);
+let st2 = new Student("Марія", "П-21", [95, 92, 89]);
+let st3 = new Student("Олег", "П-21", [80, 75, 78]);
+
+let students = [st1, st2, st3];
+students.sort(Student.compareByGrade);
+
+for (let s of students) {
+  document.write(`${s.name} (${s.group}) — середня оцінка: ${s.getAverageGrade()}<br>`);
+}
+</script>
+</body>
+</html>

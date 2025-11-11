@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 8-10</title>
+</head>
+<body>
+<script>
+function sortWords(str) {
+  let words = str.split(" ");
+  words.sort(function(a, b) {
+    if (a.length === b.length) return a.localeCompare(b);
+    return a.length - b.length;
+  });
+  return words.join(" ");
+}
+
+function mostFrequentLetter(str) {
+  let obj = {};
+  str = str.replace(/ /g, "");
+  for (let i = 0; i < str.length; i++) {
+    let ch = str[i];
+    obj[ch] = (obj[ch] || 0) + 1;
+  }
+  let max = 0, letter = "";
+  for (let k in obj) {
+    if (obj[k] > max) {
+      max = obj[k];
+      letter = k;
+    }
+  }
+  return letter;
+}
+
+function commonPrefix(arr) {
+  if (arr.length === 0) return "";
+  let prefix = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    while (arr[i].indexOf(prefix) !== 0) {
+      prefix = prefix.slice(0, -1);
+      if (prefix === "") return "";
+    }
+  }
+  return prefix;
+}
+
+document.write("8: " + sortWords("apple banana cherry date") + "<br><br>");
+document.write("9: " + mostFrequentLetter("apple pay") + "<br><br>");
+document.write("10: " + commonPrefix(["flower", "flow", "flight"]) + "<br>");
+</script>
+</body>
+</html>

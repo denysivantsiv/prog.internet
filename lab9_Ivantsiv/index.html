@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab9_Ivantsiv</title>
+<style>
+  body { text-align:center; font-family:Arial; background:#eef2f3; }
+  #train { position:relative; width:50px; height:30px; background:red; margin:20px auto; }
+  #logo { margin:50px auto; width:200px; height:200px; position:relative; }
+  .circle { position:absolute; border-radius:50%; }
+  #circle1 { width:80px; height:80px; background:#00b894; top:60px; left:60px; }
+  #circle2 { width:40px; height:40px; background:#0984e3; top:80px; left:80px; }
+  #logoText { font-size:18px; font-weight:bold; color:#0a3d62; opacity:0; transition:0.5s; }
+  button { padding:10px 20px; margin:10px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<h2>Завдання 1: рух об’єкта</h2>
+<div id="train"></div>
+<button onclick="moveTrain()">Запустити рух</button>
+
+<h2>Завдання 2: анімований логотип</h2>
+<div id="logo">
+  <div id="circle1" class="circle"></div>
+  <div id="circle2" class="circle"></div>
+  <div id="logoText">Інженерія програмного забезпечення</div>
+</div>
+<button onclick="toggleAnimation()">Старт / Стоп</button>
+
+<script>
+// Завдання 1
+function moveTrain() {
+  const train = document.getElementById("train");
+  let start = performance.now();
+  function animate(time) {
+    let progress = (time - start)/2000;
+    if(progress>1) progress=1;
+    train.style.left = progress*400 + 'px';
+    if(progress<1) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// Завдання 2
+let animating = false;
+let animationId;
+function toggleAnimation() {
+  const text = document.getElementById("logoText");
+  if(animating){
+    cancelAnimationFrame(animationId);
+    animating = false;
+    text.style.opacity=0;
+    return;
+  }
+  animating=true;
+  text.style.opacity=1;
+  let pos=0;
+  function frame(){
+    document.getElementById("circle1").style.left = 60 + 40*Math.cos(pos/20)+'px';
+    document.getElementById("circle1").style.top = 60 + 40*Math.sin(pos/20)+'px';
+    document.getElementById("circle2").style.left = 80 + 60*Math.sin(pos/25)+'px';
+    document.getElementById("circle2").style.top = 80 + 60*Math.cos(pos/25)+'px';
+    document.getElementById("circle1").style.transform = `scale(${1 + 0.2*Math.sin(pos/10)})`;
+    document.getElementById("circle2").style.transform = `scale(${1 + 0.1*Math.cos(pos/8)})`;
+    text.style.opacity = 0.5 + 0.5*Math.sin(pos/15);
+    pos +=2;
+    if(animating) animationId=requestAnimationFrame(frame);
+  }
+  frame();
+}
+</script>
+
+</body>
+</html>
