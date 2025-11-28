@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lab11_Ivantsiv</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .block {padding:10px;border:1px solid #aaa;margin:10px 0;}
+        .p {padding:5px;background:#eef;margin:3px 0;}
+    </style>
+</head>
+<body>
+
+<h1>Лабораторна робота 11</h1>
+
+
+<!--TASK 1-->
+
+
+<h2>Task 1</h2>
+
+<div class="block">
+    <h3 id="t">Text</h3>
+    <input id="inp" type="text" value="Hello">
+    <div id="box" style="width:120px;height:50px;background:lightgray;margin-top:10px;"></div>
+
+    <button id="b1">html()</button>
+    <button id="b2">css()</button>
+    <button id="b3">val()</button>
+    <button id="b4">attr()</button>
+    <button id="b5">append()</button>
+    <button id="b6">prepend()</button>
+    <button id="b7">before()</button>
+    <button id="b8">after()</button>
+    <button id="b9">remove()</button>
+</div>
+
+<!--TASK 2-->
+
+
+<h2>Task 2</h2>
+
+<div class="block">
+    <ul id="list">
+        <li class="m">a</li>
+        <li>b</li>
+        <li class="m">c</li>
+        <li>d</li>
+        <li class="m">e</li>
+    </ul>
+
+    <button id="f1">Filter class</button>
+    <button id="f2">Filter each 3rd li</button>
+</div>
+
+<!--TASK 3-->
+
+<h2>Task 3 — Variant 2</h2>
+
+<div class="block" id="z3">
+    <div class="p">1</div>
+    <div class="p child">2</div>
+    <div class="p">3</div>
+</div>
+
+<button id="z3_1">addBack()</button>
+<button id="z3_2">has()</button>
+<button id="z3_3">children()</button>
+<button id="z3_4">last()</button>
+<button id="z3_5">parents()</button>
+
+
+<!--TASK 5-->
+
+
+<h2>Task 5 — Variant 12</h2>
+
+<div class="block">
+    <button id="z5">Run</button>
+    <pre id="out"></pre>
+</div>
+
+<script>
+$("#b1").click(function(){
+    $("#t").html("New text");
+});
+
+$("#b2").click(function(){
+    $("#t").css("color","red");
+});
+
+$("#b3").click(function(){
+    alert($("#inp").val());
+});
+
+$("#b4").click(function(){
+    $("#t").attr("title","test");
+});
+
+$("#b5").click(function(){
+    $("#box").append("<p>append</p>");
+});
+
+$("#b6").click(function(){
+    $("#box").prepend("<p>prep</p>");
+});
+
+$("#b7").click(function(){
+    $("#box").before("<p>before</p>");
+});
+
+$("#b8").click(function(){
+    $("#box").after("<p>after</p>");
+});
+
+$("#b9").click(function(){
+    $("#box").remove();
+});
+
+$("#f1").click(function(){
+    $(".m").css("background","yellow").text("modify");
+});
+
+$("#f2").click(function(){
+    $("#list li").filter(function(i){
+        return (i+1)%3==0;
+    }).css("color","blue").text("modify");
+});
+
+$("#z3_1").click(function(){
+    $("#z3 .child").addBack().css("background","pink");
+});
+
+$("#z3_2").click(function(){
+    $("#z3 div").has(".child").css("border","2px solid red");
+});
+
+$("#z3_3").click(function(){
+    $("#z3").children().css("color","green");
+});
+
+$("#z3_4").click(function(){
+    $("#z3 div").last().css("background","orange");
+});
+
+$("#z3_5").click(function(){
+    $(".child").parents().css("background","#ccc");
+});
+
+$("#z5").click(function(){
+    let o = [];
+    o.push("$.isNumeric('123'): " + $.isNumeric("123"));
+    o.push("$.isPlainObject({a:1}): " + $.isPlainObject({a:1}));
+
+    let arr = $.makeArray("abc");
+    o.push("$.makeArray('abc'): " + arr.join(","));
+
+    let mapped = $.map([1,2,3], function(v){ return v+1; });
+    o.push("$.map: " + mapped.join(","));
+
+    let merged = $.merge([1,2],[3,4]);
+    o.push("$.merge: " + merged.join(","));
+
+    o.push("$.now(): " + $.now());
+    o.push("$.trim('  hi  '): '" + $.trim("  hi  ") + "'");
+    o.push("$.type([]): " + $.type([]));
+
+    $("#out").text(o.join("\n"));
+});
+</script>
+
+</body>
+</html>
