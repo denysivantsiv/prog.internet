@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lab12_Ivantsiv</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        .box {
+            width:120px;
+            height:120px;
+            background:#8cf;
+            margin:20px 0;
+            display:none;
+        }
+
+        #logo {
+            width:120px;
+            height:120px;
+            background:#faa;
+            position:relative;
+            margin-top:20px;
+            border-radius:15px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:20px;
+            font-weight:bold;
+            font-family:sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Лабораторна робота 12</h1>
+
+<!--TASK 1-->
+
+<h2>Завдання 1</h2>
+
+<div class="box" id="b1"></div>
+
+<button id="q1">queue()</button>
+<button id="q2">fadeIn()</button>
+<button id="q3">slideToggle()</button>
+<button id="q4">toggle()</button>
+
+<!--TASK 2-->
+
+<h2>Завдання 2</h2>
+
+<div id="logo">121</div>
+
+<button id="run">Start</button>
+
+<script>
+$("#q1").click(function(){
+    $("#b1").queue(function(next){
+        $(this).css("background","red");
+        next();
+    });
+    $("#b1").queue(function(next){
+        $(this).css("width","200px");
+        next();
+    });
+    $("#b1").dequeue();
+});
+
+$("#q2").click(function(){
+    $("#b1").fadeIn(600);
+});
+
+$("#q3").click(function(){
+    $("#b1").slideToggle(400);
+});
+
+$("#q4").click(function(){
+    $("#b1").toggle(400);
+});
+
+$("#run").click(function(){
+    $("#logo").animate(
+        {
+            left:"200px",
+            opacity:0.4,
+            height:"160px",
+            width:"160px"
+        },
+        {
+            duration:1200,
+            easing:"swing",
+            complete:function(){
+                $(this).animate({
+                    left:"0px",
+                    opacity:1,
+                    height:"120px",
+                    width:"120px"
+                },800);
+            },
+            queue:true
+        }
+    );
+});
+</script>
+
+</body>
+</html>
